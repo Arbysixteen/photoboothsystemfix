@@ -1,0 +1,15 @@
+node_modules/
+dist/
+captures/
+.DS_Store
+*.exe
+.env
+vendor/
+public/build/
+storage/logs/
+storage/framework/cache/
+storage/framework/sessions/
+storage/framework/testing/
+storage/framework/views/
+.phpunit.cache
+*.sqlite

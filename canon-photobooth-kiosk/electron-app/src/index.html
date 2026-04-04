@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Photobooth Kiosk</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/main.css" />
+</head>
+<body>
+  <!-- ═══ LOADING SCREEN ═══ -->
+  <div id="screen-loading" class="screen active">
+    <div class="loading-container">
+      <div class="loading-logo">
+        <div class="camera-icon">
+          <div class="camera-body">
+            <div class="camera-lens"></div>
+            <div class="camera-flash"></div>
+          </div>
+        </div>
+      </div>
+      <h1 class="loading-title">PHOTOBOOTH</h1>
+      <div class="loading-bar-container">
+        <div class="loading-bar">
+          <div class="loading-bar-fill" id="loadingBarFill"></div>
+        </div>
+      </div>
+      <p class="loading-status" id="loadingStatus">Menghubungkan kamera...</p>
+    </div>
+    <div class="particles" id="particles"></div>
+  </div>
+
+  <!-- ═══ WELCOME SCREEN ═══ -->
+  <div id="screen-welcome" class="screen">
+    <div class="welcome-bg-effects">
+      <div class="gradient-orb orb-1"></div>
+      <div class="gradient-orb orb-2"></div>
+      <div class="gradient-orb orb-3"></div>
+    </div>
+    <div class="welcome-content">
+      <div class="welcome-badge">✨ FOTO BERKUALITAS STUDIO</div>
+      <h1 class="welcome-heading">
+        <span class="heading-line">Sentuh Untuk</span>
+        <span class="heading-line accent">Mulai</span>
+      </h1>
+      <p class="welcome-subtitle">Ekspresikan dirimu dalam setiap jepretan</p>
+      <button id="btnStart" class="btn-start" onclick="goToPreview()">
+        <span class="btn-icon">📸</span>
+        <span class="btn-text">MULAI FOTO</span>
+        <div class="btn-ripple"></div>
+      </button>
+      <div class="welcome-features">
+        <div class="feature">
+          <span class="feature-icon">⚡</span>
+          <span>Hasil Instan</span>
+        </div>
+        <div class="feature">
+          <span class="feature-icon">🎨</span>
+          <span>Filter Keren</span>
+        </div>
+        <div class="feature">
+          <span class="feature-icon">🖨️</span>
+          <span>Cetak Langsung</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ PREVIEW / LIVE VIEW SCREEN ═══ -->
+  <div id="screen-preview" class="screen">
+    <div class="preview-container">
+      <!-- Camera live view -->
+      <div class="preview-frame">
+        <img id="liveViewImg" class="live-view-stream" alt="Live View" />
+        <div class="preview-overlay">
+          <div class="corner-bracket tl"></div>
+          <div class="corner-bracket tr"></div>
+          <div class="corner-bracket bl"></div>
+          <div class="corner-bracket br"></div>
+        </div>
+        <!-- Countdown overlay (hidden by default) -->
+        <div id="countdownOverlay" class="countdown-overlay hidden">
+          <span id="countdownNumber" class="countdown-number">3</span>
+        </div>
+        <!-- Flash effect -->
+        <div id="flashOverlay" class="flash-overlay"></div>
+      </div>
+
+      <!-- Controls below preview -->
+      <div class="preview-controls">
+        <button id="btnBack" class="btn-round btn-secondary" onclick="goToWelcome()">
+          <span>←</span>
+        </button>
+        <button id="btnCapture" class="btn-capture" onclick="startCapture()">
+          <div class="capture-ring"></div>
+          <div class="capture-dot"></div>
+        </button>
+        <button id="btnSettings" class="btn-round btn-secondary" onclick="toggleSettings()">
+          <span>⚙️</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ RESULT SCREEN ═══ -->
+  <div id="screen-result" class="screen">
+    <div class="result-container">
+      <div class="result-header">
+        <h2 class="result-title">Foto Berhasil! 🎉</h2>
+        <p class="result-subtitle">Foto kamu sudah tersimpan</p>
+      </div>
+      <div class="result-frame">
+        <img id="resultImage" class="result-photo" alt="Captured Photo" />
+      </div>
+      <div class="result-actions">
+        <button id="btnRetake" class="btn-action btn-retake" onclick="goToPreview()">
+          <span class="btn-icon">🔄</span>
+          <span>Foto Ulang</span>
+        </button>
+        <button id="btnPrint" class="btn-action btn-print" onclick="printPhoto()">
+          <span class="btn-icon">🖨️</span>
+          <span>Cetak</span>
+        </button>
+        <button id="btnDone" class="btn-action btn-done" onclick="goToWelcome()">
+          <span class="btn-icon">✅</span>
+          <span>Selesai</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ ERROR TOAST ═══ -->
+  <div id="errorToast" class="error-toast hidden">
+    <span id="errorMessage"></span>
+  </div>
+
+  <script src="renderer/app.js"></script>
+</body>
+</html>

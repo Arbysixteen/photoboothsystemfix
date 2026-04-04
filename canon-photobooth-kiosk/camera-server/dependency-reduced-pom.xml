@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.photobooth</groupId>
+  <artifactId>camera-server</artifactId>
+  <name>Photobooth Camera Server</name>
+  <version>1.0.0</version>
+  <description>HTTP microservice that wraps Canon EDSDK via canon-sdk-java for live view streaming and photo capture</description>
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.14.1</version>
+        <configuration>
+          <source>${java.version}</source>
+          <target>${java.version}</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>3.5.1</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <configuration>
+              <transformers>
+                <transformer>
+                  <mainClass>com.photobooth.camera.CameraServerApp</mainClass>
+                </transformer>
+              </transformers>
+              <finalName>canon-driver</finalName>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+  <properties>
+    <maven.compiler.target>${java.version}</maven.compiler.target>
+    <slf4j.version>2.0.17</slf4j.version>
+    <java.version>11</java.version>
+    <gson.version>2.10.1</gson.version>
+    <maven.compiler.source>${java.version}</maven.compiler.source>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <logback.version>1.5.27</logback.version>
+    <canon-sdk-java.version>1.2.1-SNAPSHOT</canon-sdk-java.version>
+  </properties>
+</project>

@@ -1,0 +1,48 @@
+{
+  "name": "canon-photobooth-kiosk",
+  "version": "1.0.0",
+  "description": "Canon DSLR Photobooth Kiosk - Electron + Java EDSDK",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --dev",
+    "build": "electron-builder --win --x64",
+    "build:dir": "electron-builder --win --x64 --dir"
+  },
+  "author": "Photobooth",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^28.0.0",
+    "electron-builder": "^24.9.0"
+  },
+  "build": {
+    "appId": "com.photobooth.kiosk",
+    "productName": "Photobooth Kiosk",
+    "win": {
+      "target": "nsis",
+      "icon": "build/icon.ico"
+    },
+    "nsis": {
+      "oneClick": true,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": false
+    },
+    "extraResources": [
+      {
+        "from": "../buildResources/java-server/",
+        "to": "java-server",
+        "filter": ["**/*"]
+      },
+      {
+        "from": "../buildResources/java-server/EDSDK",
+        "to": "java-server/EDSDK",
+        "filter": ["**/*"]
+      }
+    ],
+    "files": [
+      "main.js",
+      "preload.js",
+      "src/**/*"
+    ]
+  }
+}

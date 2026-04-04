@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.blackdread</groupId>
+        <artifactId>canon-sdk-java</artifactId>
+        <version>1.2.1-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
+    <artifactId>camera-binding</artifactId>
+    <packaging>jar</packaging>
+    <!-- Cannot use separate version so instead ${project.version} and binding module is deployed every time with new version even if no changes -->
+    <!--<version>1.0.0</version>-->
+
+    <name>Canon sdk java bindings</name>
+    <description>Bindings of C header files in java of EDSDK</description>
+    <url>https://github.com/Blackdread/canon-sdk-java</url>
+
+    <licenses>
+        <license>
+            <name>MIT</name>
+            <url>https://github.com/Blackdread/canon-sdk-java/blob/master/LICENSE</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    <developers>
+        <developer>
+            <id>blackdread</id>
+            <name>Yoann CAPLAIN</name>
+            <url>http://www.blackdread.org/</url>
+        </developer>
+    </developers>
+
+    <issueManagement>
+        <system>Github</system>
+        <url>https://github.com/Blackdread/canon-sdk-java/issues</url>
+    </issueManagement>
+
+    <inceptionYear>2018</inceptionYear>
+
+    <properties>
+        <!--  (All inherited from parent.) -->
+    </properties>
+
+    <profiles>
+        <profile>
+            <id>release</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
+    <dependencies>
+        <dependency>
+            <groupId>net.java.dev.jna</groupId>
+            <artifactId>jna</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>net.java.dev.jna</groupId>
+            <artifactId>jna-platform</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.nativelibs4java</groupId>
+                <artifactId>maven-jnaerator-plugin</artifactId>
+                <executions>
+                    <!-- Manually generated as files are manually copied and modified after -->
+                    <!--<execution>-->
+                    <!--<goals>-->
+                    <!--<goal>generate</goal>-->
+                    <!--</goals>-->
+                    <!--</execution>-->
+                </executions>
+                <configuration>
+                    <!--<config>${project.basedir}/src/main/jnaerator/config.jnaerator</config>-->
+                    <!--<javaOutputDirectory>${project.build.directory}/generated-sources/java</javaOutputDirectory>-->
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-eclipse-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.eluder.coveralls</groupId>
+                <artifactId>coveralls-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+
+</project>
